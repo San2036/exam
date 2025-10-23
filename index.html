@@ -1,9 +1,138 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Hello World</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Calculator</title>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #141E30, #243B55);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calculator {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px 35px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      width: 320px;
+      backdrop-filter: blur(10px);
+      transition: 0.3s ease-in-out;
+    }
+
+    .calculator:hover {
+      transform: scale(1.03);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #00e6e6;
+      text-shadow: 0 0 10px #00e6e6;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 16px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+
+    input::placeholder {
+      color: #ccc;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    button {
+      flex: 1 1 45%;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
+      transform: translateY(-2px);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #00e6e6;
+    }
+  </style>
 </head>
 <body>
-    <h1>Hello World from Docker + Python!</h1>
+  <div class="calculator">
+    <h2>✨ Simple Calculator ✨</h2>
+    <input type="number" id="num1" placeholder="Enter first number">
+    <input type="number" id="num2" placeholder="Enter second number">
+
+    <div class="buttons">
+      <button onclick="calculate('+')">➕ Add</button>
+      <button onclick="calculate('-')">➖ Subtract</button>
+      <button onclick="calculate('*')">✖ Multiply</button>
+      <button onclick="calculate('/')">➗ Divide</button>
+    </div>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculate(operation) {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      let result;
+
+      if (isNaN(num1) || isNaN(num2)) {
+        document.getElementById("result").innerHTML = "⚠ Please enter valid numbers!";
+        return;
+      }
+
+      switch (operation) {
+        case '+':
+          result = num1 + num2;
+          break;
+        case '-':
+          result = num1 - num2;
+          break;
+        case '*':
+          result = num1 * num2;
+          break;
+        case '/':
+          result = num2 !== 0 ? (num1 / num2).toFixed(2) : "❌ Cannot divide by zero";
+          break;
+      }
+
+      document.getElementById("result").innerHTML = `Result: <strong>${result}</strong>`;
+    }
+  </script>
 </body>
 </html>
